@@ -11,7 +11,9 @@ public enum SliderState
     Free = 0,
     Selected = 1,
 }
-
+/// <summary>
+/// A basic video player script to control intractions with the virtual TV.
+/// </summary>
 public class Television : MonoBehaviour
 {
     public VideoClip[] videoClips;
@@ -22,14 +24,42 @@ public class Television : MonoBehaviour
 
     public Sprite playSprite;
     public Sprite pauseSprite;
-
     public Button playButton;
+
+    public Material onMaterial;
+    public Material offMaterial;
+    public MeshRenderer lightMesh;
+    public GameObject tvCanvas;
+    public Text onAndOffText;
 
     void Awake()
     {
+
         player.Pause();
+        lightMesh.material = offMaterial;
+        TurnOff();
     }
 
+    public void ToggleSwitch(bool state)
+    {
+        if (state) TurnOn();
+        else TurnOff();
+    }
+    public void TurnOn()
+    {
+        tvCanvas.SetActive(true);
+        player.enabled = true;
+        lightMesh.material = onMaterial;
+        onAndOffText.text = "ON";
+    }
+    public void TurnOff()
+    {
+        BackToGallery();
+        tvCanvas.SetActive(false);
+        player.enabled = false;
+        lightMesh.material = offMaterial;
+        onAndOffText.text = "OFF";
+    }
     public void SetFirstVideo()
     {
         player.clip = videoClips[0];
@@ -65,11 +95,31 @@ public class Television : MonoBehaviour
             currentSliderState = SliderState.Free;
             slider.value = (float)player.time;
         }
+        CheckForInput();
     }
+
+    private void CheckForInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            if (tvCanvas.activeSelf)
+            {
+                TurnOff();
+            }
+            else
+            {
+                TurnOn();
+            }
+
+        }
+    }
+
     public void BackToGallery()
     {
         player.Pause();
         selectionScreen.SetActive(true);
+        player.time = 0;
     }
     public void PlayButtonPressed()
     {
