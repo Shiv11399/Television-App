@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf8ccdaea14c4245ae257e84d523500, type: 3}
+  m_Script: {fileID: 11500000, guid: 20198d2239126834b9eba698c1d74d9b, type: 3}
   m_Name: MarioClip
   m_EditorClassIdentifier: 
-  title: NIer
-  clip: {fileID: 0}
-  defaultVolume: 0
+  title: Mario
+  clip: {fileID: 32900000, guid: 2d60e16eed8e243419ece4410768c269, type: 3}
+  defaultVolume: 1
