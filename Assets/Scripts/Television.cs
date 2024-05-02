@@ -21,7 +21,6 @@ public class Television : MonoBehaviour
     public CustomSlider slider;
     private SliderState currentSliderState = SliderState.Free;
     public GameObject selectionScreen;
-
     public Sprite playSprite;
     public Sprite pauseSprite;
     public Button playButton;
@@ -95,14 +94,13 @@ public class Television : MonoBehaviour
             currentSliderState = SliderState.Free;
             slider.value = (float)player.time;
         }
-        CheckForInput();
+        CheckInputs();
     }
 
-    private void CheckForInput()
+    private void CheckInputs()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-
             if (tvCanvas.activeSelf)
             {
                 TurnOff();
@@ -111,7 +109,6 @@ public class Television : MonoBehaviour
             {
                 TurnOn();
             }
-
         }
     }
 
@@ -134,7 +131,10 @@ public class Television : MonoBehaviour
             SetButtonSprite(false);
         }
     }
-
+/// <summary>
+/// Set the correct pause or play sprite on the button.
+/// </summary>
+/// <param name="state"></param>
     private void SetButtonSprite(bool state)
     {
         playButton.image.sprite = state ? pauseSprite : playSprite;
